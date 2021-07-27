@@ -59,7 +59,7 @@ Since Oracle has a habit of delivering code riddled with warnings and errors, es
      
   4. Fix the code in the file and save.  
      > _Note_: Please use inline comments whenever possible.  If patching a block of code, please enclose
-     > the code block with comments, i.e. e.g. `<yourhandle dpkpatch>`, e.g. `<umaritimus dpkpatch>` so that it's easy to identify in code
+     > the code block with comments, i.e. `<yourhandle dpkpatch/>`, e.g. `<umaritimus dpkpatch/>` so that it's easy to identify in code
      
   5. Generate a package using git diff, e.g. 
 
