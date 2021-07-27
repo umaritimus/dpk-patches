@@ -1,0 +1,22 @@
+diff --git a/modules/pt_profile/manifests/pt_domain_boot.pp b/modules/pt_profile/manifests/pt_domain_boot.pp
+index 34f4e48..f5cc872 100644
+--- a/modules/pt_profile/manifests/pt_domain_boot.pp
++++ b/modules/pt_profile/manifests/pt_domain_boot.pp
+@@ -204,7 +204,7 @@ class pt_profile::pt_domain_boot {
+       $ps_cfg_home_dir    = $pia_domain_info['ps_cfg_home_dir']
+ 
+       $webserver_settings = $pia_domain_info['webserver_settings']
+-      validate_hash($webserver_settings)
++      validate_legacy(Hash, 'validate_hash', $webserver_settings)  # <umaritimus dpkpatch/>
+       $webserver_settings_array  = join_keys_to_values($webserver_settings, '=')
+ 
+       pt_webserver_domain_boot { $pia_domain_name:
+@@ -250,7 +250,7 @@ class pt_profile::pt_domain_boot {
+     $domain_home_dir = $ohs_domain_info['domain_home_dir']
+ 
+     $webserver_settings  = $ohs_domain_info['webserver_settings']
+-    validate_hash($webserver_settings)
++    validate_legacy(Hash, 'validate_hash', $webserver_settings)  # <umaritimus dpkpatch/>
+     $webserver_settings_array  = join_keys_to_values($webserver_settings, '=')
+ 
+     $node_manager_port  = $ohs_domain_info['node_manager_port']

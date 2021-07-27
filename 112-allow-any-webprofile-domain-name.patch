@@ -1,0 +1,13 @@
+diff --git a/modules/pt_config/lib/puppet/type/pt_webserver_domain.rb b/modules/pt_config/lib/puppet/type/pt_webserver_domain.rb
+index 43ea32c..704702f 100644
+--- a/modules/pt_config/lib/puppet/type/pt_webserver_domain.rb
++++ b/modules/pt_config/lib/puppet/type/pt_webserver_domain.rb
+@@ -240,7 +240,7 @@ module Puppet
+ 
+           profile_name = webprofile_settings_hash[key_profile_name]
+           # validate to make sure profile value is one of the predefined ones
+-          valid_profile_names = [ "DEV", "KIOSK", "PROD", "TEST" ]
++          valid_profile_names = [ "DEV", "KIOSK", "PROD", "TEST", profile_name ]  # <umaritimus dpkpatch/>
+           if ! valid_profile_names.include?(profile_name)
+             fail("Specified profile name '#{profile_name}' is not one of " +
+                  "valid profile names '#{valid_profile_names.inspect}")

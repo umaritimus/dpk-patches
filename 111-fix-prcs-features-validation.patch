@@ -1,0 +1,13 @@
+diff --git a/modules/pt_config/lib/puppet/type/pt_prcs_domain.rb b/modules/pt_config/lib/puppet/type/pt_prcs_domain.rb
+index fa87206..dab766a 100644
+--- a/modules/pt_config/lib/puppet/type/pt_prcs_domain.rb
++++ b/modules/pt_config/lib/puppet/type/pt_prcs_domain.rb
+@@ -54,7 +54,7 @@ module Puppet
+       validate do |value|
+ 
+         prcs_features =
+-          [ "MSTRSRV", "APPENG", "KIOSK", "DOMAIN_GW", "SERVER_EVENTS" ]
++          [ "MSTRSRV", "APPENG", "PPM", "DOMAIN_GW", "SERVER_EVENTS" ]  # <umaritimus dpkpatch/>
+ 
+         value = [value] unless value.is_a? Array
+ 

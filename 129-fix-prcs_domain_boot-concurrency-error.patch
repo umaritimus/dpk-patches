@@ -1,0 +1,38 @@
+diff --git a/modules/pt_config/lib/puppet/provider/pt_prcs_domain_boot/prcs_domain_boot.rb b/modules/pt_config/lib/puppet/provider/pt_prcs_domain_boot/prcs_domain_boot.rb
+index dd23d5d..b28ea10 100644
+--- a/modules/pt_config/lib/puppet/provider/pt_prcs_domain_boot/prcs_domain_boot.rb
++++ b/modules/pt_config/lib/puppet/provider/pt_prcs_domain_boot/prcs_domain_boot.rb
+@@ -54,7 +54,15 @@ Puppet::Type.type(:pt_prcs_domain_boot).provide :prcs_domain_boot,
+       prcs_domain_service = "PsftPrcsDomain#{domain_name}Service"
+       begin
+         # stop the windows service
+-        Service.stop(prcs_domain_service)
++
++        # <umaritimus dpkpatch>
++        Service.stop(prcs_domain_service) if Service.status(prcs_domain_service).controls_accepted.include? "stop"
++        while Service.status(prcs_domain_service).current_state != 'stopped'
++          Puppet.debug("Process Scheduler domain service #{prcs_domain_service} is in " + Service.status(prcs_domain_service).current_state + " status")
++          sleep 10
++        end
++        # </umaritimus dpkpatch>
++
+       rescue Exception => e
+         Puppet.debug("Error while stopping windows Service #{prcs_domain_service}: #{e.message}")
+         system("sc stop #{prcs_domain_service} > NUL")
+@@ -121,7 +129,15 @@ Puppet::Type.type(:pt_prcs_domain_boot).provide :prcs_domain_boot,
+           begin
+             # stop the windows service
+             Puppet.debug("Prcs domain service #{prcs_domain_service} exists, stopping it")
+-            service.stop(prcs_domain_service)
++
++            # <umaritimus dpkpatch>
++            Service.stop(prcs_domain_service) if Service.status(prcs_domain_service).controls_accepted.include? "stop"
++            while Service.status(prcs_domain_service).current_state != 'stopped'
++              Puppet.debug("Process Scheduler domain service #{prcs_domain_service} is in " + Service.status(prcs_domain_service).current_state + " status")
++              sleep 10
++            end
++            # </umaritimus dpkpatch>
++
+           rescue Exception => e
+             Puppet.debug("Error while stopping windows Service #{prcs_domain_service}: #{e.message}")
+           end

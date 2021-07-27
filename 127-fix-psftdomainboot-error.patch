@@ -1,0 +1,21 @@
+diff --git a/modules/pt_config/lib/puppet/provider/psftdomainboot.rb b/modules/pt_config/lib/puppet/provider/psftdomainboot.rb
+index 51f80dc..14fe885 100644
+--- a/modules/pt_config/lib/puppet/provider/psftdomainboot.rb
++++ b/modules/pt_config/lib/puppet/provider/psftdomainboot.rb
+@@ -145,9 +145,13 @@ class Puppet::Provider::PsftDomainBoot < Puppet::Provider
+     end
+ 	
+     begin
+-      env_type_opt = get_hiera_value("env_type")
+-      install_type_opt = get_hiera_value("install_type")
+-      
++      # <umaritimus dpkpatch>
++      # env_type_opt = get_hiera_value("env_type")
++      # install_type_opt = get_hiera_value("install_type")
++      env_type_opt = nil
++      install_type_opt = nil
++      # </umaritimus dpkpatch>
++
+       cmd_concat = " && "
+       psadmin_cmd = File.join(resource[:ps_home_dir], 'appserv', 'psadmin')
+       if Facter.value(:osfamily) == 'windows'

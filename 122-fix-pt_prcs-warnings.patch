@@ -1,0 +1,40 @@
+diff --git a/modules/pt_profile/manifests/pt_prcs.pp b/modules/pt_profile/manifests/pt_prcs.pp
+index c9c3dc9..9bc7536 100644
+--- a/modules/pt_profile/manifests/pt_prcs.pp
++++ b/modules/pt_profile/manifests/pt_prcs.pp
+@@ -65,23 +65,23 @@ class pt_profile::pt_prcs {
+ 
+     $db_settings        = $prcs_domain_info['db_settings']
+     $db_connect_pwd     = $db_settings['db_connect_pwd']
+-    validate_hash($db_settings)
++    validate_legacy(Hash, 'validate_hash', $db_settings)  # <umaritimus dpkpatch/>
+     $db_settings_array  = join_keys_to_values($db_settings, '=')
+     notify {"PRCS domain ${domain_name} with the DB settings\n":}
+ 
+     $config_settings    = $prcs_domain_info['config_settings']
+-    validate_hash($config_settings)
++    validate_legacy(Hash, 'validate_hash', $config_settings)  # <umaritimus dpkpatch/>
+     $config_settings_array = join_keys_to_values($config_settings, '=')
+     notify {"PRCS domain ${domain_name} with Config settings\n":}
+ 
+     $feature_settings   = $prcs_domain_info['feature_settings']
+-    validate_hash($feature_settings)
++    validate_legacy(Hash, 'validate_hash', $feature_settings)  # <umaritimus dpkpatch/>
+     $feature_settings_array = join_keys_to_values($feature_settings, '=')
+     notify {"PRCS domain ${domain_name} Feature settings: ${feature_settings_array}\n":}
+ 
+     $env_settings   = $prcs_domain_info['env_settings']
+     if $env_settings {
+-      validate_hash($env_settings)
++      validate_legacy(Hash, 'validate_hash', $env_settings)  # <umaritimus dpkpatch/>
+       $env_settings_array = join_keys_to_values($env_settings, '=')
+       notify {"PRCS domain ${domain_name} Env settings: ${env_settings_array}\n":}
+     }
+@@ -118,6 +118,7 @@ class pt_profile::pt_prcs {
+       }
+     }
+     elsif ($db_platform_upper == 'MSSQL') {
++      $db_location = undef  # <umaritimus dpkpatch/>
+       if $::osfamily != 'windows' {
+         fail("${db_platform_upper} database type is not supported for midtier setup on $::osfamily")
+       }

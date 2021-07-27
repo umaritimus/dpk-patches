@@ -1,0 +1,13 @@
+diff --git a/modules/pt_profile/manifests/pt_psft_environment.pp b/modules/pt_profile/manifests/pt_psft_environment.pp
+index 97ec4bc..695dd1c 100644
+--- a/modules/pt_profile/manifests/pt_psft_environment.pp
++++ b/modules/pt_profile/manifests/pt_psft_environment.pp
+@@ -92,7 +92,7 @@ class pt_profile::pt_psft_environment {
+     }
+   }
+   elsif ($pshome_db_type_upper == 'MSSQL') {
+-    notice ("Database type is MSSQL, nothing to set for the user environment")
++    $tns_location = undef  # <umaritimus dpkpatch/>
+   }
+   else {
+     fail("DB platform ${pshome_db_type_upper} is not supported")

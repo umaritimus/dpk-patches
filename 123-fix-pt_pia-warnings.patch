@@ -1,0 +1,20 @@
+diff --git a/modules/pt_profile/manifests/pt_pia.pp b/modules/pt_profile/manifests/pt_pia.pp
+index ba4e524..f4b118d 100644
+--- a/modules/pt_profile/manifests/pt_pia.pp
++++ b/modules/pt_profile/manifests/pt_pia.pp
+@@ -81,13 +81,13 @@ class pt_profile::pt_pia {
+     notify {"PIA domain ${domain_name} PS Configuration home: ${ps_cfg_home_dir}":}
+ 
+     $webserver_settings = $pia_domain_info['webserver_settings']
+-    validate_hash($webserver_settings)
++    validate_legacy(Hash, 'validate_hash', $webserver_settings)  # <umaritimus dpkpatch/>
+     $webserver_settings_array  = join_keys_to_values($webserver_settings, '=')
+     notify {"PIA domain ${domain_name} the provided WebServer settings\n":}
+ 
+     $config_settings = $pia_domain_info['config_settings']
+     if $config_settings {
+-      validate_hash($config_settings)
++      validate_legacy(Hash, 'validate_hash', $config_settings)  # <umaritimus dpkpatch/>
+       $config_settings_array = hash_of_hash_to_array_of_array($config_settings)
+       notify {"PIA domain ${domain_name} is provided with the settings\n":}
+     }

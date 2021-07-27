@@ -1,0 +1,43 @@
+diff --git a/modules/pt_profile/manifests/pt_appserver.pp b/modules/pt_profile/manifests/pt_appserver.pp
+index a4b40ef..afedbe9 100644
+--- a/modules/pt_profile/manifests/pt_appserver.pp
++++ b/modules/pt_profile/manifests/pt_appserver.pp
+@@ -64,12 +64,12 @@ class pt_profile::pt_appserver {
+ 
+     $db_settings        = $appserver_domain_info['db_settings']
+     $db_connect_pwd     = $db_settings['db_connect_pwd']
+-    validate_hash($db_settings)
++    validate_legacy(Hash, 'validate_hash', $db_settings)  # <umaritimus dpkpatch/>
+     $db_settings_array  = join_keys_to_values($db_settings, '=')
+     notify {"AppServer domain ${domain_name} with the Database settings\n":}
+ 
+     $config_settings    = $appserver_domain_info['config_settings']
+-    validate_hash($config_settings)
++    validate_legacy(Hash, 'validate_hash', $config_settings)  # <umaritimus dpkpatch/>
+     $config_settings_array = join_keys_to_values($config_settings, '=')
+     $dom_conn_pwd_setting="Security/DomainConnectionPwd"
+     if $config_settings[$dom_conn_pwd_setting] and $config_settings[$dom_conn_pwd_setting] != "" {
+@@ -81,13 +81,13 @@ class pt_profile::pt_appserver {
+     notify {"AppServer domain ${domain_name} Config settings: [${config_settings_array_log}]\n":}
+ 
+     $feature_settings   = $appserver_domain_info['feature_settings']
+-    validate_hash($feature_settings)
++    validate_legacy(Hash, 'validate_hash', $feature_settings)  # <umaritimus dpkpatch/>
+     $feature_settings_array = join_keys_to_values($feature_settings, '=')
+     notify {"AppServer domain ${domain_name} Feature settings: ${feature_settings_array}\n":}
+ 
+     $env_settings   = $appserver_domain_info['env_settings']
+     if $env_settings {
+-      validate_hash($env_settings)
++      validate_legacy(Hash, 'validate_hash', $env_settings)  # <umaritimus dpkpatch/>
+       $env_settings_array = join_keys_to_values($env_settings, '=')
+       notify {"AppServer domain ${domain_name} Env settings: ${env_settings_array}\n":}
+     }
+@@ -114,6 +114,7 @@ class pt_profile::pt_appserver {
+       $db_location = $oracle_hiera['location']
+     }
+     elsif ($db_platform_upper == 'MSSQL') {
++      $db_location = undef  # <umaritimus dpkpatch/>
+       if $::osfamily != 'windows' {
+         fail("${db_platform_upper} database type is not supported for midtier setup on $::osfamily")
+         }

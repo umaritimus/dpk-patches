@@ -1,0 +1,38 @@
+diff --git a/modules/pt_config/lib/puppet/provider/pt_appserver_domain_boot/appserver_domain_boot.rb b/modules/pt_config/lib/puppet/provider/pt_appserver_domain_boot/appserver_domain_boot.rb
+index e355056..cafcea3 100644
+--- a/modules/pt_config/lib/puppet/provider/pt_appserver_domain_boot/appserver_domain_boot.rb
++++ b/modules/pt_config/lib/puppet/provider/pt_appserver_domain_boot/appserver_domain_boot.rb
+@@ -54,7 +54,15 @@ Puppet::Type.type(:pt_appserver_domain_boot).provide :appserver_domain_boot,
+       appserver_domain_service = "PsftAppServerDomain#{domain_name}Service"
+       begin
+         # stop the windows service
+-        Service.stop(appserver_domain_service)
++
++        # <umaritimus dpkpatch>
++        Service.stop(appserver_domain_service) if Service.status(appserver_domain_service).controls_accepted.include? "stop"
++        while Service.status(appserver_domain_service).current_state != 'stopped'
++          Puppet.debug("AppServer domain service #{appserver_domain_service} is in " + Service.status(appserver_domain_service).current_state + " status")
++          sleep 10
++        end
++        # </umaritimus dpkpatch>
++
+       rescue Exception => e
+         Puppet.debug("Error while stopping windows Service #{appserver_domain_service}: #{e.message}")
+         system("sc stop #{appserver_domain_service} > NUL")
+@@ -120,7 +128,15 @@ Puppet::Type.type(:pt_appserver_domain_boot).provide :appserver_domain_boot,
+           begin
+             # stop the windows service
+             Puppet.debug("AppServer domain service #{appserver_domain_service} exists, stopping it")
+-            service.stop(appserver_domain_service)
++
++            # <umaritimus dpkpatch>
++            Service.stop(appserver_domain_service) if Service.status(appserver_domain_service).controls_accepted.include? "stop"
++            while Service.status(appserver_domain_service).current_state != 'stopped'
++              Puppet.debug("AppServer domain service #{appserver_domain_service} is in " + Service.status(appserver_domain_service).current_state + " status")
++              sleep 10
++            end
++            # </umaritimus dpkpatch>
++
+           rescue Exception => e
+             Puppet.debug("Error while stopping windows Service #{appserver_domain_service}: #{e.message}")
+           end

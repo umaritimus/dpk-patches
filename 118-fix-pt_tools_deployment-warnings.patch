@@ -1,0 +1,52 @@
+diff --git a/modules/pt_profile/manifests/pt_tools_deployment.pp b/modules/pt_profile/manifests/pt_tools_deployment.pp
+index 2e4232b..d7816ad 100644
+--- a/modules/pt_profile/manifests/pt_tools_deployment.pp
++++ b/modules/pt_profile/manifests/pt_tools_deployment.pp
+@@ -61,7 +61,17 @@ class pt_profile::pt_tools_deployment {
+     $inventory_location        = $inventory_hiera['location']
+     notice ("Inventory location is  ${inventory_location}")
+ 
++  }
++
++  # <umaritimus dpkpatch>
++  else {
++      $tools_install_user_name   = undef
++      $tools_install_group_name  = undef
++      $oracle_install_user_name  = undef
++      $oracle_install_group_name = undef
++      $inventory_location        = undef
+   }
++  # </umaritimus dpkpatch>
+   $deploy_pshome_only    = hiera('deploy_pshome_only', false)
+ 
+   $pshome_hiera          = hiera('ps_home')
+@@ -94,6 +104,14 @@ class pt_profile::pt_tools_deployment {
+         }
+         notice ("Oracle client remove is ${oracleclient_remove}")
+       }
++
++      # <umaritimus dpkpatch>
++      else {
++        $oracleclient_location = undef
++        $oracleclient_remove = undef
++      }
++      # </umaritimus dpkpatch>
++
+     }
+     $jdk_hiera             = hiera('jdk')
+     $jdk_location          = $jdk_hiera['location']
+@@ -141,6 +159,14 @@ class pt_profile::pt_tools_deployment {
+       }
+       notice ("OHS remove is ${ohs_remove}")
+     }
++
++    # <umaritimus dpkpatch>
++    else {
++      $ohs_location = undef
++      $ohs_remove = undef
++    }
++    # </umaritimus dpkpatch>
++
+   }
+   $redeploy = hiera('redeploy', false)
+   $apply_infra_cpu = hiera('apply_infra_cpu', false)

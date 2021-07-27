@@ -1,0 +1,13 @@
+diff --git a/modules/pt_profile/manifests/pt_tools_preboot_config.pp b/modules/pt_profile/manifests/pt_tools_preboot_config.pp
+index 56c826a..df48ff6 100644
+--- a/modules/pt_profile/manifests/pt_tools_preboot_config.pp
++++ b/modules/pt_profile/manifests/pt_tools_preboot_config.pp
+@@ -57,7 +57,7 @@ class pt_profile::pt_tools_preboot_config {
+       $os_user            = $component_details['os_user']
+       $db_settings        = $component_details['db_settings']
+       $db_connect_pwd     = $db_settings['db_connect_pwd']
+-      validate_hash($db_settings)
++      validate_legacy(Hash, 'validate_hash', $db_settings)  # <umaritimus dpkpatch/>
+       $db_settings_array  = join_keys_to_values($db_settings, '=')
+       notify {"PRE-Boot Tools Component ${component_name} config Database settings\n":}
+ 

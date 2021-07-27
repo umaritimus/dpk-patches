@@ -1,0 +1,24 @@
+diff --git a/modules/pt_profile/manifests/pt_pia.pp b/modules/pt_profile/manifests/pt_pia.pp
+index f4b118d..c13f697 100644
+--- a/modules/pt_profile/manifests/pt_pia.pp
++++ b/modules/pt_profile/manifests/pt_pia.pp
+@@ -105,15 +105,15 @@ class pt_profile::pt_pia {
+       ps_home_dir           => $pshome_location,
+       os_user               => $os_user,
+       ps_cfg_home_dir       => $ps_cfg_home_dir,
+-      webserver_settings    => $webserver_settings_array,
+-      config_settings       => $config_settings_array,
++      webserver_settings    => Sensitive($webserver_settings_array),  # <umaritimus dpkpatch/>
++      config_settings       => Sensitive($config_settings_array),  # <umaritimus dpkpatch/>
+       gateway_user          => $gateway_user,
+       gateway_user_pwd      => $gateway_user_pwd,
+       auth_token_domain     => $auth_token_domain,
+-      site_list             => $pia_site_list_array,
++      site_list             => Sensitive($pia_site_list_array),  # <umaritimus dpkpatch/>
+       webserver_install_type=> $webserver_install_type,
+       recreate              => $recreate,
+-      pia_gateway_keystore_pwd => $pia_gateway_keystore_pwd,
++      pia_gateway_keystore_pwd => Sensitive($pia_gateway_keystore_pwd),  # <umaritimus dpkpatch/>
+     }
+     if $setup_services == true {
+       if ($::kernel == 'Linux') or ($::kernel == 'DISABLEAIX') {
