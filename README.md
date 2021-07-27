@@ -1,5 +1,5 @@
 # dpk-patches
-Custom patches to the delivered dpk code to ensure buttery-smooth deployment :TM:
+Custom patches to the delivered dpk code to ensure buttery-smooth-deployment ™️
 
 > Note:  The code in this branch is developped and tested to PeopleTools 8.59.03 with non-"relocatable" puppet, but could be adopted for other releases and circumstances
 
