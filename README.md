@@ -39,7 +39,7 @@ Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
 Get-ChildItem .\dpk-patches\*.patch | Sort-Object -Property Name | ForEach-Object {
     ${patch} = ${_}.Name
     Write-Output "Applying ${patch}"
-    & git apply ".\dpk-patches\${patch}"  --verbose
+    & git apply ".\dpk-patches\${patch}" --verbose
 }
 ```
 
@@ -74,8 +74,15 @@ Get-ChildItem .\dpk-patches\*.patch | Sort-Object -Property Name | ForEach-Objec
 
      ```powershell
      Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
-     git apply .\dpk-patches\999-fix-appserver_domain_boot-some-bug.patch
+     git apply .\dpk-patches\999-fix-appserver_domain_boot-some-bug.patch --verbose
      ```
+     you should see output similar to:
+     
+     ```text
+     Checking patch modules/pt_config/lib/puppet/provider/pt_appserver_domain_boot/appserver_domain_boot.rb...
+     Applied patch modules/pt_config/lib/puppet/provider/pt_appserver_domain_boot/appserver_domain_boot.rb cleanly.
+     ```
+
   7. Submit the patch
     
 ## Notes:
