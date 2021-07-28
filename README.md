@@ -14,34 +14,35 @@ Since Oracle has a habit of delivering code riddled with warnings and errors, es
 
 Navigate to your environment where the dpk modules reside and create a git repository, if it already doesn't exist, e.g.
 
-    ```powershell
-    Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
-    & git init
-    ```
+```powershell
+Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
+& git init
+```
 
 ### Clone `dpk-patches` repo into a subdirectory
 
 In the same location, clone `dpk-patches` repository into a subdirectory, e.g. 
 
-    ```powershell
-    Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
-    & git clone https://github.com/umaritimus/dpk-patches.git
-    Get-ChildItem -Path '.\dpk-patches\'
-    ```
+```powershell
+Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
+& git clone https://github.com/umaritimus/dpk-patches.git
+Get-ChildItem -Path '.\dpk-patches\'
+```
 
 ### Apply patches
 
 Execute `git apply` for the patches to your dpk installation, e.g. 
 
-    ```powershell
-    # Apply all patches from 'dpk-patches' repo
-    Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
-    Get-ChildItem .\dpk-patches\*.patch | Sort-Object -Property Name | ForEach-Object {
-        ${patch} = ${_}.Name
-        Write-Output "Applying ${patch}"
-        & git apply ".\dpk-patches\${patch}"  --verbose
-    }
-    ```
+```powershell
+# Apply all patches from 'dpk-patches' repo
+Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
+Get-ChildItem .\dpk-patches\*.patch | Sort-Object -Property Name | ForEach-Object {
+    ${patch} = ${_}.Name
+    Write-Output "Applying ${patch}"
+    & git apply ".\dpk-patches\${patch}"  --verbose
+}
+```
+
 > _Note_: Your working directory must be `<puppet_base_dir>\production` due to relative paths within patches
 
 ### Contributing
