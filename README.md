@@ -5,7 +5,7 @@ Custom patches to the delivered dpk code to ensure buttery-smooth-deployment ™
 
 ## Motivation
 
-Since Oracle has a habit of delivering code riddled with warnings and errors, especially for non-oracle platforms, I am publishing a set of my patches to supplement the dpk code misdelivered in PeopleTools DPK for Native Windows installations.  However most of this code should work equally well on Linux and/or previous PeopleTools releases.
+Since Oracle has a habit of delivering code riddled with warnings and errors, especially for non-oracle platforms, I am publishing a set of my patches to supplement the dpk code misdelivered in PeopleTools DPK.
 
 ## Installation
 
