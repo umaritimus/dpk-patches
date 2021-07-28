@@ -1,5 +1,6 @@
 # dpk-patches
-Custom patches to the delivered dpk code to ensure buttery-smooth-deployment ™️
+
+**Custom patches to the delivered dpk code to ensure buttery-smooth-deployment ™️**
 
 > Note:  The code in this branch is developped and tested on PeopleTools 8.59.03 with non-"relocatable" puppet.  Eventhough, it's specifically targeting native Windows installations, most of the code should work equally well on Linux and/or previous PeopleTools releases, or be portable enough to be applicable for other circumstances.
 
@@ -11,8 +12,7 @@ Since Oracle has a habit of delivering code riddled with warnings and errors, es
 
 ### Ensure that your `<puppet_base_dir>`\production is a git repository
 
-1. Navigate to your environment where the dpk modules reside
-2. Create a git repository (if it already doesn't exist...) e.g.
+Navigate to your environment where the dpk modules reside and create a git repository (if it already doesn't exist...) e.g.
 
     ```powershell
     Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
@@ -21,7 +21,7 @@ Since Oracle has a habit of delivering code riddled with warnings and errors, es
 
 ### Clone `dpk-patches` repo into a subdirectory
 
-1. In the same location, clone `dpk-patches` repository into a subdirectory, e.g. 
+In the same location, clone `dpk-patches` repository into a subdirectory, e.g. 
 
     ```powershell
     Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
@@ -31,9 +31,10 @@ Since Oracle has a habit of delivering code riddled with warnings and errors, es
 
 ### Apply patches
 
-1. Execute `git apply` for the patches to your dpk installation, e.g. to Apply all patches from `dpk-patches` repo, 
+Execute `git apply` for the patches to your dpk installation, e.g. 
 
     ```powershell
+    # Apply all patches from 'dpk-patches' repo
     Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
     Get-ChildItem .\dpk-patches\*.patch | Sort-Object -Property Name | ForEach-Object {
         ${patch} = ${_}.Name
