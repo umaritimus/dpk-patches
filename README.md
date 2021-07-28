@@ -12,7 +12,7 @@ Since Oracle has a habit of delivering code riddled with warnings and errors, es
 ### Ensure that your `<puppet_base_dir>`\production is a git repository
 
 1. Navigate to your environment where the dpk modules reside
-2. Create a git repository (if it already doesn't exist... hint: it should exist because you are good like that) e.g.
+2. Create a git repository (if it already doesn't exist...) e.g.
 
     ```powershell
     Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
