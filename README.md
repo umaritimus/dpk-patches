@@ -1,11 +1,11 @@
 # dpk-patches
 Custom patches to the delivered dpk code to ensure buttery-smooth-deployment ™️
 
-> Note:  The code in this branch is developped and tested to PeopleTools 8.59.03 with non-"relocatable" puppet, but could be adopted for other releases and circumstances
+> Note:  The code in this branch is developped and tested on PeopleTools 8.59.03 with non-"relocatable" puppet.  Eventhough, it's specifically targeting native Windows installations, most of the code should work equally well on Linux and/or previous PeopleTools releases, or be portable enough to be applicable for other circumstances.
 
 ## Motivation
 
-Since Oracle has a habit of delivering code riddled with warnings and errors, especially for non-oracle platforms, I am publishing a set of my patches to supplement the dpk code misdelivered in PeopleTools DPK for Native Windows installations.
+Since Oracle has a habit of delivering code riddled with warnings and errors, especially for non-oracle platforms, I am publishing a set of my patches to supplement the dpk code misdelivered in PeopleTools DPK for Native Windows installations.  However most of this code should work equally well on Linux and/or previous PeopleTools releases.
 
 ## Installation
 
