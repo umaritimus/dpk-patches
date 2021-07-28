@@ -69,13 +69,13 @@ Execute `git apply` for the patches to your dpk installation, e.g.
      git diff modules\pt_config\lib\puppet\provider\pt_appserver_domain_boot\appserver_domain_boot.rb | `
      Out-File -Encoding ascii dpk-patches\999-fix-appserver_domain_boot-some-bug.patch
      ```
-   6. Copy patch to a test environment and apply, e.g.
+  6. Copy patch to a test environment and apply, e.g.
 
      ```powershell
      Set-Location 'c:\ProgramData\PuppetLabs\code\environments\production'
      git apply .\dpk-patches\999-fix-appserver_domain_boot-some-bug.patch
      ```
-   7. Submit the patch
+  7. Submit the patch
     
 ## Notes:
 
