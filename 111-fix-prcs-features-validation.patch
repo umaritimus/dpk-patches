@@ -7,7 +7,7 @@ index fa87206..dab766a 100644
  
          prcs_features =
 -          [ "MSTRSRV", "APPENG", "KIOSK", "DOMAIN_GW", "SERVER_EVENTS" ]
-+          [ "MSTRSRV", "APPENG", "PPM", "DOMAIN_GW", "SERVER_EVENTS" ]  # <umaritimus dpkpatch/>
++          [ "MSTRSRV", "APPENG", "PPM", "RTI", "DOMAIN_GW", "SERVER_EVENTS" ]  # <umaritimus dpkpatch/>
  
          value = [value] unless value.is_a? Array
  
