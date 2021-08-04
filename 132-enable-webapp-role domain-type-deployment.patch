@@ -1,0 +1,22 @@
+diff --git a/modules/pt_profile/manifests/pt_domain_boot.pp b/modules/pt_profile/manifests/pt_domain_boot.pp
+index f5cc872..7b85e59 100644
+--- a/modules/pt_profile/manifests/pt_domain_boot.pp
++++ b/modules/pt_profile/manifests/pt_domain_boot.pp
+@@ -92,7 +92,7 @@ class pt_profile::pt_domain_boot {
+     }
+   }
+ 
+-  if ($domain_type in [ 'all', 'appserver', 'appbatch']) {
++  if ($domain_type in [ 'all', 'appserver', 'appbatch', 'webapp']) {  # <umaritimus dpkpatch/>
+     $appserver_domain_list = hiera('appserver_domain_list')
+     $appserver_domain_list.each |$app_domain_name, $appserver_domain_info| {
+       notify {"Setting up AppServer domain boot ${app_domain_name}":}
+@@ -195,7 +195,7 @@ class pt_profile::pt_domain_boot {
+     }
+   }
+ 
+-  if ($domain_type in [ 'all', 'pia']) {
++  if ($domain_type in [ 'all', 'pia' ,'webapp']) {  # <umaritimus dpkpatch/>
+     $pia_domain_list = hiera('pia_domain_list')
+     $pia_domain_list.each |$pia_domain_name, $pia_domain_info| {
+       notify {"Setting up PIA domain boot ${pia_domain_name}":}
