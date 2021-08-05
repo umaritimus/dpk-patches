@@ -16,7 +16,7 @@ index f5cc872..7b85e59 100644
    }
  
 -  if ($domain_type in [ 'all', 'pia']) {
-+  if ($domain_type in [ 'all', 'pia' ,'webapp']) {  # <umaritimus dpkpatch/>
++  if ($domain_type in [ 'all', 'pia', 'webapp']) {  # <umaritimus dpkpatch/>
      $pia_domain_list = hiera('pia_domain_list')
      $pia_domain_list.each |$pia_domain_name, $pia_domain_info| {
        notify {"Setting up PIA domain boot ${pia_domain_name}":}
