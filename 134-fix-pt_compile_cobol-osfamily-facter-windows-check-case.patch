@@ -1,0 +1,31 @@
+diff --git a/modules/pt_config/lib/puppet/type/pt_compile_cobol.rb b/modules/pt_config/lib/puppet/type/pt_compile_cobol.rb
+index 9863de5..d8af6cc 100644
+--- a/modules/pt_config/lib/puppet/type/pt_compile_cobol.rb
++++ b/modules/pt_config/lib/puppet/type/pt_compile_cobol.rb
+@@ -90,7 +90,7 @@ module Puppet
+       desc "* Unix Only * The user who installed PS_HOME"
+ 
+       validate do |value|
+-        if Facter.value(:osfamily) == 'Windows'
++        if Facter.value(:osfamily) == 'windows'  # <bloodmc dpkpatch/>
+           fail("Unable to execute commands as other users on Windows")
+         elsif !Puppet.features.root? && Etc.getpwuid(Process.uid).name != value
+           fail("Only root can execute commands as other users")
+@@ -103,7 +103,7 @@ module Puppet
+       desc "* Unix Only * The user who installed PS_APP_HOME"
+ 
+       validate do |value|
+-        if Facter.value(:osfamily) == 'Windows'
++        if Facter.value(:osfamily) == 'windows'  # <bloodmc dpkpatch/>
+           fail("Unable to execute commands as other users on Windows")
+         elsif !Puppet.features.root? && Etc.getpwuid(Process.uid).name != value
+           fail("Only root can execute commands as other users")
+@@ -116,7 +116,7 @@ module Puppet
+       desc "* Unix Only * The user who owns PS_CUST_HOME"
+ 
+       validate do |value|
+-        if Facter.value(:osfamily) == 'Windows'
++        if Facter.value(:osfamily) == 'windows'  # <bloodmc dpkpatch/>
+           fail("Unable to execute commands as other users on Windows")
+         elsif !Puppet.features.root? && Etc.getpwuid(Process.uid).name != value
+           fail("Only root can execute commands as other users")
