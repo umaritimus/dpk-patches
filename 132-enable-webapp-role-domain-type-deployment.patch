@@ -3,7 +3,7 @@ index f5cc872..7b85e59 100644
 --- a/modules/pt_profile/manifests/pt_domain_boot.pp
 +++ b/modules/pt_profile/manifests/pt_domain_boot.pp
 @@ -92,7 +92,7 @@ class pt_profile::pt_domain_boot {
-     }
+     }  
    }
  
 -  if ($domain_type in [ 'all', 'appserver', 'appbatch']) {
@@ -11,7 +11,7 @@ index f5cc872..7b85e59 100644
      $appserver_domain_list = hiera('appserver_domain_list')
      $appserver_domain_list.each |$app_domain_name, $appserver_domain_info| {
        notify {"Setting up AppServer domain boot ${app_domain_name}":}
-@@ -195,7 +195,7 @@ class pt_profile::pt_domain_boot {
+@@ -197,7 +197,7 @@ class pt_profile::pt_domain_boot {
      }
    }
  

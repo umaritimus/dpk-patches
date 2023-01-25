@@ -2,7 +2,7 @@ diff --git a/modules/pt_profile/manifests/pt_domain_boot.pp b/modules/pt_profile
 index 34f4e48..f5cc872 100644
 --- a/modules/pt_profile/manifests/pt_domain_boot.pp
 +++ b/modules/pt_profile/manifests/pt_domain_boot.pp
-@@ -204,7 +204,7 @@ class pt_profile::pt_domain_boot {
+@@ -206,7 +206,7 @@ class pt_profile::pt_domain_boot {
        $ps_cfg_home_dir    = $pia_domain_info['ps_cfg_home_dir']
  
        $webserver_settings = $pia_domain_info['webserver_settings']
@@ -11,7 +11,7 @@ index 34f4e48..f5cc872 100644
        $webserver_settings_array  = join_keys_to_values($webserver_settings, '=')
  
        pt_webserver_domain_boot { $pia_domain_name:
-@@ -250,7 +250,7 @@ class pt_profile::pt_domain_boot {
+@@ -253,7 +253,7 @@ class pt_profile::pt_domain_boot {
      $domain_home_dir = $ohs_domain_info['domain_home_dir']
  
      $webserver_settings  = $ohs_domain_info['webserver_settings']
