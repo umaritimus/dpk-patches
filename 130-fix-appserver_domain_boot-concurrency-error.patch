@@ -17,12 +17,12 @@ index e355056..cafcea3 100644
 +        # </umaritimus dpkpatch>
 +
        rescue Exception => e
-         Puppet.debug("Error while stopping windows Service #{appserver_domain_service}: #{e.message}")
+         Puppet.notice("Error while stopping windows Service #{appserver_domain_service}: #{e.message}")
          system("sc stop #{appserver_domain_service} > NUL")
 @@ -120,7 +128,15 @@ Puppet::Type.type(:pt_appserver_domain_boot).provide :appserver_domain_boot,
            begin
              # stop the windows service
-             Puppet.debug("AppServer domain service #{appserver_domain_service} exists, stopping it")
+             Puppet.notice("AppServer domain service #{appserver_domain_service} exists, stopping it")
 -            service.stop(appserver_domain_service)
 +
 +            # <umaritimus dpkpatch>
@@ -34,5 +34,5 @@ index e355056..cafcea3 100644
 +            # </umaritimus dpkpatch>
 +
            rescue Exception => e
-             Puppet.debug("Error while stopping windows Service #{appserver_domain_service}: #{e.message}")
+             Puppet.notice("Error while stopping windows Service #{appserver_domain_service}: #{e.message}")
            end
