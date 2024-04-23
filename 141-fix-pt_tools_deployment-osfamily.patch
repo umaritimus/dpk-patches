@@ -1,0 +1,13 @@
+diff --git a/modules/pt_profile/manifests/pt_tools_deployment.pp b/modules/pt_profile/manifests/pt_tools_deployment.pp
+index 841a226..72b8ee3 100644
+--- a/modules/pt_profile/manifests/pt_tools_deployment.pp
++++ b/modules/pt_profile/manifests/pt_tools_deployment.pp
+@@ -31,7 +31,7 @@ class pt_profile::pt_tools_deployment {
+     fail('The pt_tools_deployment profile can only be applied to env_type of fulltier or midtier')
+   }
+   $tools_archive_location      = hiera('archive_location')
+-  if $::osfamily != 'windows' {
++  if $facts[os][family] != 'windows' {  # <umaritimus dpkpatch/>
+     $users_hiera               = hiera('users')
+     $psft_user                 = $users_hiera['psft_user']
+ 
