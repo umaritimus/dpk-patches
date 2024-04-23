@@ -1,0 +1,13 @@
+diff --git a/modules/pt_setup/manifests/psft_filesystem.pp b/modules/pt_setup/manifests/psft_filesystem.pp
+index 32d3d61..cf72696 100644
+--- a/modules/pt_setup/manifests/psft_filesystem.pp
++++ b/modules/pt_setup/manifests/psft_filesystem.pp
+@@ -26,7 +26,7 @@ class pt_setup::psft_filesystem {
+   $ptc_location = "${pt_location}/tools_client"
+ 
+   if $ensure == present {
+-    if $::osfamily == 'windows' {  
++    if $facts['os']['family'] == 'windows' {  # <umaritimus dpkpatch/>
+        @file { $pt_location:
+          ensure  => directory,         
+        }
