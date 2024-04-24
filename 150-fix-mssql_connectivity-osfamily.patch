@@ -1,0 +1,13 @@
+diff --git a/modules/pt_setup/manifests/mssql_connectivity.pp b/modules/pt_setup/manifests/mssql_connectivity.pp
+index f968ed2..976f030 100644
+--- a/modules/pt_setup/manifests/mssql_connectivity.pp
++++ b/modules/pt_setup/manifests/mssql_connectivity.pp
+@@ -29,7 +29,7 @@ define pt_setup::mssql_connectivity (
+   $server_name = undef,
+   $odbc_name   = undef,
+   ) {
+-  if $::osfamily == 'windows' {
++  if $facts['os']['family'] == 'windows' {  # <umaritimus dpkpatch/>
+     if $ensure == present {
+       # set the ODBC for the database
+       if $odbc_name == 'ODBC Driver 17 for SQL Server' {
