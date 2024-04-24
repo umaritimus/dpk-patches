@@ -1,0 +1,27 @@
+diff --git a/modules/pt_setup/manifests/user_environment.pp b/modules/pt_setup/manifests/user_environment.pp
+index 19b2808..3e36fd0 100644
+--- a/modules/pt_setup/manifests/user_environment.pp
++++ b/modules/pt_setup/manifests/user_environment.pp
+@@ -38,7 +38,7 @@ define pt_setup::user_environment (
+   ) {
+   include ::pt_setup::params
+ 
+-  if $::osfamily == 'windows' {
++  if $facts['os']['family'] == 'windows' {  # <umaritimus dpkpatch/>
+     if $ensure == present {
+       $ps_home_dir_norm     = normalize_path($ps_home_dir)
+       $ps_cfg_home_dir_norm = normalize_path($ps_cfg_home_dir)
+
+diff --git a/modules/pt_setup/lib/puppet/parser/functions/normalize_path.rb b/modules/pt_setup/lib/puppet/parser/functions/normalize_path.rb
+index 5eafd0c..eab712c 100644
+--- a/modules/pt_setup/lib/puppet/parser/functions/normalize_path.rb
++++ b/modules/pt_setup/lib/puppet/parser/functions/normalize_path.rb
+@@ -29,7 +29,7 @@ module Puppet::Parser::Functions
+     end
+ 
+     norm_path = args[0]
+-    if lookupvar('osfamily') == 'windows'
++    if lookupvar('::facts')['os']['family'] == 'windows'
+       norm_path = norm_path.gsub('/', '\\')
+     end
+     Puppet.debug("Normalized path: #{norm_path}")
