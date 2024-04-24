@@ -1,0 +1,13 @@
+diff --git a/modules/pt_setup/manifests/params.pp b/modules/pt_setup/manifests/params.pp
+index 9b81ac1..a5478b6 100644
+--- a/modules/pt_setup/manifests/params.pp
++++ b/modules/pt_setup/manifests/params.pp
+@@ -29,7 +29,7 @@
+ # Sample Usage:
+ #
+ class pt_setup::params {
+-  if $::osfamily != 'windows' {
++  if $family['os']['family'] != 'windows' {  # <umaritimus dpkpatch/>
+     $is_root = inline_template('<%= Puppet.features.root?%>')
+     if $is_root != "true" {
+       $user_profile_file_temp = "psft_env.sh"
