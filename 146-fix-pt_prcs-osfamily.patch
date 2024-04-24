@@ -1,0 +1,24 @@
+diff --git a/modules/pt_profile/manifests/pt_prcs.pp b/modules/pt_profile/manifests/pt_prcs.pp
+index d695567..a8a00d1 100644
+--- a/modules/pt_profile/manifests/pt_prcs.pp
++++ b/modules/pt_profile/manifests/pt_prcs.pp
+@@ -119,8 +119,8 @@ class pt_profile::pt_prcs {
+     }
+     elsif ($db_platform_upper == 'MSSQL') {
+       $db_location = undef  # <umaritimus dpkpatch/>
+-      if $::osfamily != 'windows' {
+-        fail("${db_platform_upper} database type is not supported for midtier setup on $::osfamily")
++      if $facts[os][family] != 'windows' { # <umaritimus dpkpatch/>
++        fail("${db_platform_upper} database type is not supported for midtier setup on ${facts[os][family]}") # <umaritimus dpkpatch/>
+       }
+     }
+     else {
+@@ -129,7 +129,7 @@ class pt_profile::pt_prcs {
+     #Check if non-root user on *nix has psft_user in system yaml, else use 
+     #the os-user from prcs_domain_info
+     $is_root = inline_template('<%= Puppet.features.root?%>')
+-    if $::osfamily != 'windows' and $is_root != 'true' {
++    if $facts[os][family] != 'windows' and $is_root != 'true' { # <umaritimus dpkpatch/>
+       $os_user_temp          = $prcs_domain_info['os_user']
+       $users_hiera           = hiera('users')
+       $psft_single_installer = $users_hiera['psft_user']
