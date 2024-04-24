@@ -1,0 +1,40 @@
+diff --git a/modules/pt_profile/manifests/pt_psft_environment.pp b/modules/pt_profile/manifests/pt_psft_environment.pp
+index 0b40dc2..91aff3a 100644
+--- a/modules/pt_profile/manifests/pt_psft_environment.pp
++++ b/modules/pt_profile/manifests/pt_psft_environment.pp
+@@ -35,7 +35,7 @@ class pt_profile::pt_psft_environment {
+   $pshome_db_type       = $pshome_hiera['db_type']
+   $pshome_db_type_upper = upcase($pshome_db_type)
+ 
+-  if $::osfamily != 'windows' {
++  if $facts[os][family] != 'windows' { # <umaritimus dpkpatch/>
+     $users_hiera = hiera('users')
+   }
+ 
+@@ -65,7 +65,7 @@ class pt_profile::pt_psft_environment {
+       fail('env_type parameter value must be fulltier, midtier or dbtier')
+     }
+     # setup DB user 'oracle' environment
+-    if $::osfamily != 'windows' {
++    if $facts[os][family] != 'windows' { # <umaritimus dpkpatch/>
+       $oracle_user_hiera    = $users_hiera['oracle_user']
+       if ($oracle_user_hiera) and ($oracle_user_hiera != '') {
+         $oracle_user          = $oracle_user_hiera['name']
+@@ -127,7 +127,7 @@ class pt_profile::pt_psft_environment {
+       else {
+         $cobol_location = ""
+       }
+-    if $::osfamily != 'windows' {
++    if $facts[os][family] != 'windows' { # <umaritimus dpkpatch/>
+       # PeopleSoft single user
+       $psft_single_installer = $users_hiera['psft_user']
+       if ($psft_single_installer) and ($psft_single_installer != '') {
+@@ -245,7 +245,7 @@ class pt_profile::pt_psft_environment {
+       }
+     }
+   }
+-  if $::osfamily == 'windows' {
++  if $facts[os][family] == 'windows' { # <umaritimus dpkpatch/>
+     ::pt_setup::user_environment { "psft_win_environment":
+       ensure           => $ensure,
+       ps_home_dir      => $pshome_location,
