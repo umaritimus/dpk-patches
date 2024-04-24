@@ -1,0 +1,31 @@
+diff --git a/modules/pt_profile/manifests/pt_domain_boot.pp b/modules/pt_profile/manifests/pt_domain_boot.pp
+index b134df1..5449983 100644
+--- a/modules/pt_profile/manifests/pt_domain_boot.pp
++++ b/modules/pt_profile/manifests/pt_domain_boot.pp
+@@ -46,7 +46,7 @@ class pt_profile::pt_domain_boot {
+     $psapphome_location = $psapphome_hiera['location']
+     notify {"Domain boot PS APP Home: [${psapphome_location}]\n":}
+   }
+-  if ($::osfamily == 'windows') and ($env_type == 'fulltier') {
++  if ($facts[os][family] == 'windows') and ($env_type == 'fulltier') {  # <umaritimus dpkpatch/>
+     $oracleserver_hiera    = hiera('oracle_server')
+     $oracle_listener_name = $oracleserver_hiera['listener_name']
+     $oracle_listener_service = "OracleOraDB19Home1TNSListener${oracle_listener_name}"
+@@ -107,7 +107,7 @@ class pt_profile::pt_domain_boot {
+         os_user          => $os_user,
+       }
+ 
+-      if ($::osfamily == 'windows') and ($env_type == 'fulltier') {
++      if ($facts[os][family] == 'windows') and ($env_type == 'fulltier') {  # <umaritimus dpkpatch/>
+         $appserver_domain_service = "PsftAppServerDomain${app_domain_name}Service"
+ 
+         $sc_path =  "$system32\\sc.exe"  
+@@ -159,7 +159,7 @@ class pt_profile::pt_domain_boot {
+         ps_cfg_home_dir  => $ps_cfg_home_dir,
+         os_user          => $os_user,
+       }
+-      if ($::osfamily == 'windows') and ($env_type == 'fulltier') {
++      if ($facts[os][family] == 'windows') and ($env_type == 'fulltier') { # <umaritimus dpkpatch/>
+         $prcs_domain_service = "PsftPrcsDomain${prcs_domain_name}Service"
+ 
+         $sc_path =  "$system32\\sc.exe"  
