@@ -8,7 +8,7 @@ index e28c753..19c431e 100644
        $db_location = undef  # <umaritimus dpkpatch/>
 -      if $::osfamily != 'windows' {
 -        fail("${db_platform_upper} database type is not supported for midtier setup on $::osfamily")
-+      if $facts[os][family] != 'windows' { # <umaritimus dpkpatch/>
++      if $facts['os']['family'] != 'windows' { # <umaritimus dpkpatch/>
 +        fail("${db_platform_upper} database type is not supported for midtier setup on ${facts[os][family]}") # <umaritimus dpkpatch/>
          }
      }
@@ -17,7 +17,7 @@ index e28c753..19c431e 100644
      #the os-user from appserver_domain_info
      $is_root = inline_template('<%= Puppet.features.root?%>')
 -    if $::osfamily != 'windows' and $is_root != 'true' {
-+    if $facts[os][family] != 'windows' and $is_root != 'true' { # <umaritimus dpkpatch/>
++    if $facts['os']['family'] != 'windows' and $is_root != 'true' { # <umaritimus dpkpatch/>
         $os_user_temp          = $appserver_domain_info['os_user']
         $users_hiera           = hiera('users')
         $psft_single_installer = $users_hiera['psft_user']

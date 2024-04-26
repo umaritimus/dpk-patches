@@ -16,7 +16,7 @@ index b134df1..5449983 100644
        }
  
 -      if ($::osfamily == 'windows') and ($env_type == 'fulltier') {
-+      if ($facts[os][family] == 'windows') and ($env_type == 'fulltier') {  # <umaritimus dpkpatch/>
++      if ($facts['os']['family'] == 'windows') and ($env_type == 'fulltier') {  # <umaritimus dpkpatch/>
          $appserver_domain_service = "PsftAppServerDomain${app_domain_name}Service"
  
          $sc_path =  "$system32\\sc.exe"  
@@ -25,7 +25,7 @@ index b134df1..5449983 100644
          os_user          => $os_user,
        }
 -      if ($::osfamily == 'windows') and ($env_type == 'fulltier') {
-+      if ($facts[os][family] == 'windows') and ($env_type == 'fulltier') { # <umaritimus dpkpatch/>
++      if ($facts['os']['family'] == 'windows') and ($env_type == 'fulltier') { # <umaritimus dpkpatch/>
          $prcs_domain_service = "PsftPrcsDomain${prcs_domain_name}Service"
  
          $sc_path =  "$system32\\sc.exe"  

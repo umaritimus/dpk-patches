@@ -7,7 +7,7 @@ index d4c6c69..cc09053 100644
    $is_root = inline_template('<%= Puppet.features.root?%>')
  
 -  if $::osfamily != 'windows' and $is_root == "true" {
-+  if $facts[os][family] != 'windows' and $is_root == "true" {  # <umaritimus dpkpatch/>
++  if $facts['os']['family'] != 'windows' and $is_root == "true" {  # <umaritimus dpkpatch/>
      $ensure = hiera('ensure')
  
      $env_type = hiera('env_type')    

@@ -7,7 +7,7 @@ index bccb3ac..b5f7692 100644
      fail('The pt_mssql_setup profile can only be applied to midtier env_type')
    }
 -  if $::osfamily != 'windows' {
-+  if $facts[os][family] != 'windows' { # <umaritimus dpkpatch/>
++  if $facts['os']['family'] != 'windows' { # <umaritimus dpkpatch/>
      fail('The pt_mssql_setup profile can only be applied on windows platforms')
    }
    $mssql_server_list = hiera('mssql_server_list')

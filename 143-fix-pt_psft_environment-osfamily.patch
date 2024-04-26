@@ -7,7 +7,7 @@ index 0b40dc2..91aff3a 100644
    $pshome_db_type_upper = upcase($pshome_db_type)
  
 -  if $::osfamily != 'windows' {
-+  if $facts[os][family] != 'windows' { # <umaritimus dpkpatch/>
++  if $facts['os']['family'] != 'windows' { # <umaritimus dpkpatch/>
      $users_hiera = hiera('users')
    }
  
@@ -16,7 +16,7 @@ index 0b40dc2..91aff3a 100644
      }
      # setup DB user 'oracle' environment
 -    if $::osfamily != 'windows' {
-+    if $facts[os][family] != 'windows' { # <umaritimus dpkpatch/>
++    if $facts['os']['family'] != 'windows' { # <umaritimus dpkpatch/>
        $oracle_user_hiera    = $users_hiera['oracle_user']
        if ($oracle_user_hiera) and ($oracle_user_hiera != '') {
          $oracle_user          = $oracle_user_hiera['name']
@@ -25,7 +25,7 @@ index 0b40dc2..91aff3a 100644
          $cobol_location = ""
        }
 -    if $::osfamily != 'windows' {
-+    if $facts[os][family] != 'windows' { # <umaritimus dpkpatch/>
++    if $facts['os']['family'] != 'windows' { # <umaritimus dpkpatch/>
        # PeopleSoft single user
        $psft_single_installer = $users_hiera['psft_user']
        if ($psft_single_installer) and ($psft_single_installer != '') {
@@ -34,7 +34,7 @@ index 0b40dc2..91aff3a 100644
      }
    }
 -  if $::osfamily == 'windows' {
-+  if $facts[os][family] == 'windows' { # <umaritimus dpkpatch/>
++  if $facts['os']['family'] == 'windows' { # <umaritimus dpkpatch/>
      ::pt_setup::user_environment { "psft_win_environment":
        ensure           => $ensure,
        ps_home_dir      => $pshome_location,
